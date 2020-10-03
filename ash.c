@@ -28,6 +28,11 @@ char *get_input() {
     if (i == current_size) {
       current_size = i + buffer_size;
       inp = realloc(inp, buffer_size);
+
+      if (inp == NULL) {
+        fprintf(stderr, "Failed to reallocate read buffer\n");
+        shutdown(EXIT_FAILURE);
+      }
     }
   }
 
@@ -42,7 +47,7 @@ char *get_input() {
 }
 
 int main() {
-  int cmd_ret;
+  int cmd_ret = 0;
 
   while (1) {
     printf("$");

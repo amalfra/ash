@@ -1,14 +1,21 @@
 EXECUTABLE=ash
+DIST_DIR=dist
+
+.PHONY: clean lint
 
 all: shell
 
 shell: ash.c
-	gcc -g -o $(EXECUTABLE) ash.c -Wall -W
+	${MAKE} clean
+	mkdir ${DIST_DIR}
+	gcc -g -o $(DIST_DIR)/$(EXECUTABLE) ash.c -Wall -W
 
-.PHONY: clean
+run: ash.c
+	${MAKE} shell
+	$(DIST_DIR)/$(EXECUTABLE)
+
 clean:
-	rm $(EXECUTABLE)
+	rm -rf $(DIST_DIR)
 
-.PHONY: lint
 lint: ash.c
 	cppcheck --error-exitcode=1 .
