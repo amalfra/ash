@@ -1,0 +1,12 @@
+language: c
+compiler: gcc
+dist: trusty
+
+before_install:
+  - sudo apt-get update -qq
+
+install: 
+  - sudo apt-get install -qq cppcheck
+
+script: 
+  - make lint

@@ -11,4 +11,4 @@ clean:
 
 .PHONY: lint
 lint: ash.c
-	checkpatch --no-tree --file shell.c
+	cppcheck --error-exitcode=1 .
