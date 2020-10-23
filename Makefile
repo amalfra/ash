@@ -7,8 +7,9 @@ all: shell
 
 shell: ash.c
 	${MAKE} clean
+	${MAKE} lint
 	mkdir ${DIST_DIR}
-	gcc -g -o $(DIST_DIR)/$(EXECUTABLE) ash.c -Wall -W
+	gcc -o $(DIST_DIR)/$(EXECUTABLE) ash.c
 
 run: ash.c
 	${MAKE} shell
@@ -18,4 +19,4 @@ clean:
 	rm -rf $(DIST_DIR)
 
 lint: ash.c
-	cppcheck --error-exitcode=1 .
+	cppcheck --enable=all --error-exitcode=1 .
