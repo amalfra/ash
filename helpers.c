@@ -12,15 +12,15 @@ void shutdown(int status) {
 }
 
 int is_blank(char *input) {
-	int n = strlen(input);
+  int n = strlen(input);
 
-	for (int i = 0; i < n; i++) {
-		if (!isspace(input[i])) {
-			return 0;
+  for (int i = 0; i < n; i++) {
+    if (!isspace(input[i])) {
+      return 0;
     }
-	}
+  }
 
-	return 1;
+  return 1;
 }
 
 char *get_input() {
@@ -63,8 +63,8 @@ char *get_input() {
 }
 
 void close_pipes(int (*pipes)[2], int pipe_count) {
-	for (int i = 0; i < pipe_count; i++) {
-		close(pipes[i][0]);
-		close(pipes[i][1]);
-	}
+  for (int i = 0; i < pipe_count; i++) {
+    close(pipes[i][0]);
+    close(pipes[i][1]);
+  }
 }

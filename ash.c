@@ -18,10 +18,10 @@ int main() {
 
     // process commands
     if (!is_blank(input)) {
-			struct Commands *commands = parse_commands_with_pipes(input);
+      struct Commands *commands = parse_commands_with_pipes(input);
       cmd_ret = exec_command(commands, commands->cmds[0], NULL);
       wait(NULL);
-		}
+    }
 
     free(input);
 

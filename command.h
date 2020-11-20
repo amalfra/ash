@@ -1,7 +1,7 @@
-#define ARG_MAX_COUNT 1024  
-#define CMD_DELIM " "  
-#define CMD_PIPE_DELIM "|"   
-#define STR_END_MARKER '\0' 
+#define ARG_MAX_COUNT 1024
+#define CMD_DELIM " "
+#define CMD_PIPE_DELIM "|"
+#define STR_END_MARKER '\0'
 
 // to store parsed command
 struct Command {

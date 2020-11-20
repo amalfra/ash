@@ -13,8 +13,8 @@ struct Command *parse_command(char *input) {
 	struct Command *cmd = calloc(sizeof(struct Command) + ARG_MAX_COUNT * sizeof(char *), 1);
 
 	if (cmd == NULL) {
-    fprintf(stderr, "Failed to allocate command buffer\n");
-    shutdown(EXIT_FAILURE);
+		fprintf(stderr, "Failed to allocate command buffer\n");
+		shutdown(EXIT_FAILURE);
 	}
 
 	// split based on space
@@ -25,7 +25,7 @@ struct Command *parse_command(char *input) {
 		token = strtok(NULL, CMD_DELIM);
 	}
 
-  // the command will be first token; eg: cd myfolder/myfolder2
+	// the command will be first token; eg: cd myfolder/myfolder2
 	cmd->name = cmd->argv[0];
 	cmd->argc = tokenCount;
 
@@ -34,16 +34,16 @@ struct Command *parse_command(char *input) {
 
 struct Commands *parse_commands_with_pipes(char *input) {
 	int count = 0;
-  int i = 0;
+	int i = 0;
 	char *token;
 	char *c = input;
-  struct Commands *cmds;
+	struct Commands *cmds;
 
-  // count the number of pipes to find the number of commands
+	// count the number of pipes to find the number of commands
 	while (*c != STR_END_MARKER) {
 		if (strncmp(c, CMD_PIPE_DELIM, 1) == 0) {
-		  count++;
-    }
+			count++;
+		}
 		c++;
 	}
 
@@ -52,11 +52,11 @@ struct Commands *parse_commands_with_pipes(char *input) {
 	cmds = calloc(sizeof(struct Commands) + count * sizeof(struct Command *), 1);
 
 	if (cmds == NULL) {
-    fprintf(stderr, "Failed to allocate pipe commands buffer\n");
-    shutdown(EXIT_FAILURE);
+		fprintf(stderr, "Failed to allocate pipe commands buffer\n");
+		shutdown(EXIT_FAILURE);
 	}
 
-  // split based on pipe operator
+	// split based on pipe operator
 	token = strtok(input, CMD_PIPE_DELIM);
 
 	while (token != NULL && i < count) {
@@ -68,7 +68,6 @@ struct Commands *parse_commands_with_pipes(char *input) {
 
 	return cmds;
 }
-
 
 void cleanup_commands(struct Commands *cmds) {
 	for (int i = 0; i < cmds->count; i++) {
@@ -96,7 +95,7 @@ int exec_command(struct Commands *cmds, struct Command *cmd, int (*pipes)[2]) {
 		// execute the command
 		char exec_path[50];
 		char binPath[50];
-  	sprintf(binPath, "%c%s%c%s", pathSeparator, "usr", pathSeparator, "bin");
+		sprintf(binPath, "%c%s%c%s", pathSeparator, "usr", pathSeparator, "bin");
 		sprintf(exec_path, "%s%c%s", binPath, pathSeparator, cmd->name);
 		execv(exec_path, cmd->argv);
 
