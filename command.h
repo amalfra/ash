@@ -19,3 +19,7 @@ struct Commands {
 struct Command *parse_command(char *input);
 
 struct Commands *parse_commands_with_pipes(char *input);
+
+void cleanup_commands(struct Commands *cmds);
+
+int exec_command(struct Commands *cmds, struct Command *cmd, int (*pipes)[2]);

@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 #include "helpers.h"
 
@@ -58,4 +60,11 @@ char *get_input() {
   inp[i] = '\0';
 
   return inp;
+}
+
+void close_pipes(int (*pipes)[2], int pipe_count) {
+	for (int i = 0; i < pipe_count; i++) {
+		close(pipes[i][0]);
+		close(pipes[i][1]);
+	}
 }

@@ -1,9 +1,10 @@
 #include "command.c"
+#include <sys/wait.h>
 
 char *input;
 
 int main() {
-  // int cmd_ret = 0;
+  int cmd_ret = 0;
 
   while (1) {
     printf("$");
@@ -18,14 +19,15 @@ int main() {
     // process commands
     if (!is_blank(input)) {
 			struct Commands *commands = parse_commands_with_pipes(input);
-      printf("%d", commands->count);
+      cmd_ret = exec_command(commands, commands->cmds[0], NULL);
+      wait(NULL);
 		}
 
     free(input);
 
-    /* if (cmd_ret == -1) {
+    if (cmd_ret == -1) {
       break;
-    } */
+    }
   }
 
   shutdown(EXIT_SUCCESS);
