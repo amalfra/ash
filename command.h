@@ -5,15 +5,15 @@
 
 // to store parsed command
 struct Command {
-	int argc;
-	char *name;
-	char *argv[ARG_MAX_COUNT];
+  int argc;
+  char *name;
+  char *argv[ARG_MAX_COUNT];
 };
 
 // to store list of read commands
 struct Commands {
-	int count;
-	struct Command *cmds[];
+  int count;
+  struct Command *cmds[];
 };
 
 struct Command *parse_command(char *input);
